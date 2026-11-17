@@ -38,3 +38,4 @@ This project is a learning environment for exploring AI-assisted software develo
 - Run validation appropriate to the change. Add meaningful tests for behavior that needs coverage; documentation-only edits do not require an Android build.
 - Report checks that could not run and why. Keep README.md aligned with deliberate changes to the project's stack or SDK configuration.
 - Do not commit, push, or publish unless the developer requests it.
+- When the developer requests a PR, create or reuse the appropriate branch, commit and push only the relevant changes, and provide a prefilled GitHub PR link with the intended base branch, title, and description. The developer submits the PR manually. Do not attempt automatic PR submission, probe GitHub PR authentication, or install or suggest integrations solely to submit it. Report the branch and link as prepared, not as an opened PR; this request does not authorize merging or publishing a release.
