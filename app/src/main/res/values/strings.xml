@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">PokeApi</string>
+    <string name="home_title">Pokédex</string>
+    <string name="home_description">Discover Pokémon and their types.</string>
+    <string name="home_loading">Loading Pokémon…</string>
+    <string name="home_loading_more">Loading more Pokémon…</string>
+    <string name="home_error">Could not load Pokémon. Please try again.</string>
+    <string name="home_append_error">Could not load the next page. Your Pokémon are still here.</string>
+    <string name="home_empty">No Pokémon found.</string>
+    <string name="home_end">You have reached the end of the Pokédex.</string>
+    <string name="retry">Retry</string>
 </resources>
