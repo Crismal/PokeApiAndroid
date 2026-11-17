@@ -24,6 +24,7 @@ This project is a learning environment for exploring AI-assisted software develo
 
 ## Android implementation
 
+- For every new implementation or application-code change, read and apply the project skill [.agents/skills/solid-clean-code/SKILL.md](.agents/skills/solid-clean-code/SKILL.md). Use SOLID principles and Clean Code with complexity proportional to the task.
 - Use Kotlin, Jetpack Compose, and Material 3, following existing project conventions.
 - Build features toward MVVM: Compose renders state, ViewModels manage screen state and actions, and repositories handle data access. Keep networking out of composables.
 - Treat Gradle configuration as the source of truth for SDK and dependency versions. Explain and justify changes to dependencies or build configuration.
@@ -33,6 +34,7 @@ This project is a learning environment for exploring AI-assisted software develo
 
 ## Scope, validation, and collaboration
 
+- Follow the project [GitFlow skill](.agents/skills/gitflow/SKILL.md) for all development branches, commits, pull requests, releases, and hotfixes. Use `master` for stable releases and `develop` for integration; ordinary work branches from and targets `develop`. Follow the skill's initial setup guidance if `develop` is absent.
 - Inspect relevant files before changing them. Preserve existing developer changes and keep edits focused on the requested task.
 - Never commit credentials, tokens, or machine-specific configuration.
 - Run validation appropriate to the change. Add meaningful tests for behavior that needs coverage; documentation-only edits do not require an Android build.
