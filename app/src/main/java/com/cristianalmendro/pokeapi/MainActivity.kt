@@ -7,10 +7,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.cristianalmendro.pokeapi.ui.home.HomeScreen
+import com.cristianalmendro.pokeapi.ui.home.HomeViewModel
 import com.cristianalmendro.pokeapi.ui.theme.PokeApiTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,30 +21,20 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            PokeApiTheme {
+            val repository = (application as PokeApiApplication).pokemonRepository
+            val factory = remember(repository) { HomeViewModel.factory(repository) }
+            val homeViewModel: HomeViewModel = viewModel(factory = factory)
+            val state by homeViewModel.state.collectAsStateWithLifecycle()
+            PokeApiTheme(darkTheme = false, dynamicColor = false) {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                    HomeScreen(
+                        state = state,
+                        onLoadMore = homeViewModel::loadNextPage,
+                        onRetry = homeViewModel::retry,
+                        modifier = Modifier.padding(innerPadding),
                     )
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    PokeApiTheme {
-        Greeting("Android")
     }
 }
