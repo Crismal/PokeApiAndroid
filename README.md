@@ -27,7 +27,9 @@ With MVVM, Compose screens display UI state and send user actions to ViewModels.
 
 Home displays Pokemon IDs, names, types, and API-provided artwork. It loads 20 Pokemon initially and automatically requests another page near the end of the list. Failed page loads offer retry while preserving previously loaded cards. Search, filters, sorting, and detail navigation are reserved for separate changes.
 
-The repository caches successful pages and Pokemon details in memory, with an HTTP disk cache for server-cacheable API responses. Detail requests are limited to four at a time and retain the API's list ordering. Coil loads and caches artwork and renders the existing SVG assets.
+The repository reads saved pages and Pokemon details from Room before requesting the API. Page ordering, next-page cursors, and fetch timestamps survive app restarts. Missing pages are downloaded, stored transactionally, and then read from the database. Detail requests are limited to four at a time and retain the API's list ordering.
+
+An app-wide Coil image loader uses a 100 MiB disk cache and a memory cache capped at 15% of available app memory. Image files stay outside Room; the database stores their URLs. The 20 MiB HTTP cache remains for server-cacheable API responses. See [local storage behavior](docs/local-storage.md) for cache policy, offline limitations, and database schema guidance.
 
 The screen follows the saved Home screenshot. Dimensions in `ui/home/HomeDimensions` are estimates for manual tuning; the bundled system font is used because the design's SF Pro font is not included. Home currently uses a fixed light appearance to match that reference.
 
