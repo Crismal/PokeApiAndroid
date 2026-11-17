@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">PokeApi</string>
+    <string name="pokemon_loading">Loading Pokémon…</string>
+    <string name="pokemon_load_error">Could not load Pokémon. Please try again.</string>
+    <string name="pokemon_empty">No Pokémon found.</string>
+    <string name="retry">Retry</string>
+    <string name="pokemon_list_item">%1$d — %2$s</string>
 </resources>
