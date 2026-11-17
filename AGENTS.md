@@ -17,6 +17,7 @@ This project is a learning environment for exploring AI-assisted software develo
 
 ## Teach through the work
 
+- Apply the local [prompt-coach skill](.agents/skills/prompt-coach/SKILL.md) to every user prompt in this project, including questions, follow-ups, implementation requests, and Git commands. Begin with brief feedback grounded in the conversation context, suggest a rewrite when useful, then answer or execute the authorized task. If a prompt is already sufficient, explain why without inventing flaws. Routine coaching does not require confirmation; keep longer introductions subject to the developer's learning preferences.
 - Explain significant changes, alternatives, and tradeoffs in clear language.
 - Connect each capability to the concrete problem it solves in the current prompt.
 - When helpful, suggest one relevant next learning opportunity without expanding the requested implementation automatically.
@@ -30,6 +31,7 @@ This project is a learning environment for exploring AI-assisted software develo
 - Treat Gradle configuration as the source of truth for SDK and dependency versions. Explain and justify changes to dependencies or build configuration.
 - Follow the linked Figma design in README.md. Reuse theme colors, typography, spacing, and assets. If design values or assets cannot be inspected, report what is missing rather than presenting guesses as verified design values.
 - Handle loading, empty, success, and error states where applicable to PokeAPI features.
+- For PokeAPI work, apply the [local API reference skill](.agents/skills/pokeapi-local-reference/SKILL.md) and consult [docs/api/pokeapi/README.md](docs/api/pokeapi/README.md) first. Do not reopen the online API documentation during routine implementation; document knowledge gaps and use the skill's explicit refresh workflow when needed.
 - Store Android assets in the appropriate resource directories and use valid Android resource names.
 
 ## Scope, validation, and collaboration
