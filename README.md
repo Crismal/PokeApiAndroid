@@ -45,4 +45,6 @@ To verify the implementation:
 
 Read [AGENTS.md](AGENTS.md) for the project's AI collaboration instructions. For each prompt, the assistant should identify relevant capabilities, explain why they help, and use them when appropriate. We want to learn when to use each capability through practical work on this app.
 
+See the [model-selection guide and decision diagram](docs/ai-model-guide.md) for task-based recommendations. Before changes, the assistant recommends a suitable model and reasoning effort. After application implementation, it installs and launches the tested app and leaves it ready for manual testing when a device is available.
+
 AI-generated changes still require human review. Review the code, understand the decisions, and check the reported validation before accepting a change.
