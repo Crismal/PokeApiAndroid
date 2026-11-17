@@ -5,7 +5,7 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import org.json.JSONException
 import org.json.JSONObject
 
-data class PokemonReferences(val ids: List<Int>, val nextOffset: Int?)
+data class PokemonReferences(val ids: List<Int>, val nextOffset: Int?, val names: List<String> = emptyList())
 
 interface PokemonApi {
     suspend fun getReferences(offset: Int, limit: Int): PokemonReferences
@@ -40,7 +40,8 @@ class PokeApiService(private val http: JsonHttpClient) : PokemonApi {
                     ?: throw IOException("Pagination did not advance")
             }
             if (ids.isEmpty() && next != null) throw IOException("Empty page with a next cursor")
-            PokemonReferences(ids, next)
+            val names = List(results.length()) { results.getJSONObject(it).getString("name") }
+            PokemonReferences(ids, next, names)
         }
     }
 

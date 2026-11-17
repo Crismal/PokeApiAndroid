@@ -12,3 +12,7 @@ data class PokemonPage(val items: List<Pokemon>, val nextOffset: Int?)
 interface PokemonRepository {
     suspend fun getPage(offset: Int, limit: Int): PokemonPage
 }
+
+interface PokemonDetailsRepository {
+    suspend fun getPokemon(id: Int): Pokemon
+}

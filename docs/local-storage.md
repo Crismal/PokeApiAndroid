@@ -26,7 +26,7 @@ Coil caches artwork that has actually been loaded. It does not predownload every
 
 ## Schema and dependencies
 
-The initial database schema is version 1 and is exported under `app/schemas/`. Commit schema changes with the implementation. Future schema changes must increase the version and supply a tested migration; destructive migration is not enabled.
+The initial database schema is version 1. Version 2 adds the [search catalogue](search.md) with an explicit migration that preserves existing records and pages. Both schemas are exported under `app/schemas/`. Commit schema changes with the implementation. Future schema changes must increase the version and supply a tested migration; destructive migration is not enabled.
 
 Room 2.8.5 uses the existing `androidx.room` APIs. KSP 2.3.12 generates the DAO/database implementation without adding a separate Kotlin Android plugin to the existing AGP built-in Kotlin setup. SDK and Kotlin configuration are unchanged.
 

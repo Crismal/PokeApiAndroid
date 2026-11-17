@@ -37,4 +37,4 @@ The following are implementation expectations for this project, not additional s
 - Stop when `next` is null. Treat an empty page that still reports `next` as an unexpected condition requiring bounded handling, not an invitation to loop forever.
 - Keep cancellation distinct from a user-visible failure.
 
-Search is not covered by this reference's Home implementation requirements. Exact name/ID lookup uses the detail resource; do not assume the list endpoint supports a free-text search query.
+Exact name/ID lookup uses the detail resource; the list endpoint does not support a free-text search query. This project implements partial-name search using a complete local ID/name index populated through these list pages; see [local search](../../search.md).

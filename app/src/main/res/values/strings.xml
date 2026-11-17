@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">PokeApi</string>
     <string name="home_title">Pokédex</string>
-    <string name="home_description">Discover Pokémon and their types.</string>
+    <string name="home_description">Search Pokémon by name or ID.</string>
     <string name="home_loading">Loading Pokémon…</string>
     <string name="home_loading_more">Loading more Pokémon…</string>
     <string name="home_error">Could not load Pokémon. Please try again.</string>
@@ -9,4 +9,13 @@
     <string name="home_empty">No Pokémon found.</string>
     <string name="home_end">You have reached the end of the Pokédex.</string>
     <string name="retry">Retry</string>
+    <string name="search_hint">What Pokémon are you looking for?</string>
+    <string name="search_clear">Clear search</string>
+    <string name="search_preparing">Preparing the local Pokémon catalogue…</string>
+    <string name="search_loading">Searching the local catalogue…</string>
+    <string name="search_error">Could not search the catalogue. Connect and retry if setup is incomplete.</string>
+    <string name="search_empty">No matching Pokémon.</string>
+    <string name="search_end">All matching Pokémon are shown.</string>
+    <string name="search_details_error">Details unavailable. Saved names and IDs are still searchable.</string>
+    <string name="search_details_loading">Loading details…</string>
 </resources>

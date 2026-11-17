@@ -25,7 +25,9 @@ With MVVM, Compose screens display UI state and send user actions to ViewModels.
 
 ## Home
 
-Home displays Pokemon IDs, names, types, and API-provided artwork. It loads 20 Pokemon initially and automatically requests another page near the end of the list. Failed page loads offer retry while preserving previously loaded cards. Search, filters, sorting, and detail navigation are reserved for separate changes.
+Home displays Pokemon IDs, names, types, and API-provided artwork. It loads 20 Pokemon initially and automatically requests another page near the end of the list. Failed page loads offer retry while preserving previously loaded cards. Filters, sorting, and detail navigation are reserved for separate changes.
+
+Search matches partial names or exact IDs (including `#025`) against a complete local Room catalogue. The first search downloads only ID/name references; later queries reuse that index offline. Details and artwork load for composed result rows and reuse existing caches. Clearing search restores the Home list. See [search behavior](docs/search.md) for the migration, retry behavior, and manual test steps.
 
 The repository reads saved pages and Pokemon details from Room before requesting the API. Page ordering, next-page cursors, and fetch timestamps survive app restarts. Missing pages are downloaded, stored transactionally, and then read from the database. Detail requests are limited to four at a time and retain the API's list ordering.
 

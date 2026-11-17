@@ -12,6 +12,9 @@ import com.cristianalmendro.pokeapi.data.PokemonRepository
 import com.cristianalmendro.pokeapi.data.image.createPokemonImageLoader
 import com.cristianalmendro.pokeapi.data.local.PokemonDatabase
 import com.cristianalmendro.pokeapi.data.local.RoomPokemonLocalDataSource
+import com.cristianalmendro.pokeapi.data.local.RoomPokemonSearchLocalDataSource
+import com.cristianalmendro.pokeapi.data.search.LocalPokemonSearchRepository
+import com.cristianalmendro.pokeapi.data.search.PokemonSearchRepository
 import java.io.File
 import java.util.concurrent.TimeUnit
 import okhttp3.Cache
@@ -19,14 +22,20 @@ import okhttp3.OkHttpClient
 
 class PokeApiApplication : Application(), SingletonImageLoader.Factory {
     private val database by lazy {
-        Room.databaseBuilder(this, PokemonDatabase::class.java, "pokemon.db").build()
+        Room.databaseBuilder(this, PokemonDatabase::class.java, "pokemon.db")
+            .addMigrations(PokemonDatabase.MIGRATION_1_2).build()
     }
-    val pokemonRepository: PokemonRepository by lazy {
+    private val api by lazy {
         val client = OkHttpClient.Builder()
             .cache(Cache(File(cacheDir, "pokeapi-http"), 20L * 1024 * 1024))
             .callTimeout(30, TimeUnit.SECONDS)
             .build()
-        PokeApiRepository(PokeApiService(OkHttpJsonClient(client)), RoomPokemonLocalDataSource(database))
+        PokeApiService(OkHttpJsonClient(client))
+    }
+    private val repository by lazy { PokeApiRepository(api, RoomPokemonLocalDataSource(database)) }
+    val pokemonRepository: PokemonRepository get() = repository
+    val searchRepository: PokemonSearchRepository by lazy {
+        LocalPokemonSearchRepository(api, RoomPokemonSearchLocalDataSource(database), repository)
     }
 
     override fun newImageLoader(context: Context): ImageLoader = createPokemonImageLoader(context)

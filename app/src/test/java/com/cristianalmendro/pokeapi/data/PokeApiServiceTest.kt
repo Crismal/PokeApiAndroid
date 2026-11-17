@@ -14,7 +14,7 @@ class PokeApiServiceTest {
                 "results":[{"name":"test","url":"https://pokeapi.co/api/v2/pokemon/99/"},
                 {"name":"test2","url":"https://pokeapi.co/api/v2/pokemon/101/"}]}""")
         })
-        assertEquals(PokemonReferences(listOf(99, 101), 20), service.getReferences(0, 20))
+        assertEquals(PokemonReferences(listOf(99, 101), 20, listOf("test", "test2")), service.getReferences(0, 20))
     }
 
     @Test fun rejectsUntrustedPaginationUrl() = runTest {

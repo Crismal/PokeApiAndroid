@@ -18,7 +18,7 @@ import org.junit.Test
 class HomeScreenTest {
     @get:Rule val compose = createComposeRule()
 
-    @Test fun cardsShowIdsNamesAndTypesWithoutSearch() {
+    @Test fun cardsShowIdsNamesAndTypesWithSearchField() {
         compose.setContent {
             PokeApiTheme {
                 HomeScreen(HomeUiState(pokemon = listOf(bulbasaur), hasMore = false), {}, {})
@@ -29,7 +29,7 @@ class HomeScreenTest {
         compose.onNodeWithText("Bulbasaur").assertIsDisplayed()
         compose.onNodeWithText("Grass").assertIsDisplayed()
         compose.onNodeWithText("Poison").assertIsDisplayed()
-        compose.onNodeWithText("What Pokémon are you looking for?").assertDoesNotExist()
+        compose.onNodeWithTag("pokemon-search").assertIsDisplayed()
     }
 
     @Test fun scrollingNearEndRequestsNextPage() {

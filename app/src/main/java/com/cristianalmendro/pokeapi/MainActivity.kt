@@ -14,6 +14,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.cristianalmendro.pokeapi.ui.home.HomeScreen
 import com.cristianalmendro.pokeapi.ui.home.HomeViewModel
+import com.cristianalmendro.pokeapi.ui.home.PokemonSearchViewModel
 import com.cristianalmendro.pokeapi.ui.theme.PokeApiTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,6 +26,10 @@ class MainActivity : ComponentActivity() {
             val factory = remember(repository) { HomeViewModel.factory(repository) }
             val homeViewModel: HomeViewModel = viewModel(factory = factory)
             val state by homeViewModel.state.collectAsStateWithLifecycle()
+            val searchRepository = (application as PokeApiApplication).searchRepository
+            val searchFactory = remember(searchRepository) { PokemonSearchViewModel.factory(searchRepository) }
+            val searchViewModel: PokemonSearchViewModel = viewModel(factory = searchFactory)
+            val searchState by searchViewModel.state.collectAsStateWithLifecycle()
             PokeApiTheme(darkTheme = false, dynamicColor = false) {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     HomeScreen(
@@ -32,6 +37,12 @@ class MainActivity : ComponentActivity() {
                         onLoadMore = homeViewModel::loadNextPage,
                         onRetry = homeViewModel::retry,
                         modifier = Modifier.padding(innerPadding),
+                        searchState = searchState,
+                        onQueryChange = searchViewModel::onQueryChange,
+                        onSearchLoadMore = searchViewModel::loadNextPage,
+                        onSearchRetry = searchViewModel::retry,
+                        onLoadDetails = { searchViewModel.loadDetails(it) },
+                        onRetryDetails = { searchViewModel.loadDetails(it, retry = true) },
                     )
                 }
             }
