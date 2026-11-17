@@ -1,0 +1,23 @@
+{
+  "captured_at_utc": "2026-11-17T20:24:50.343652+00:00",
+  "purpose": "Local project reference; examples are snapshots, not exhaustive schemas.",
+  "sources": [
+    {
+      "url": "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0",
+      "file": "pokemon-page.json",
+      "reduced": false
+    },
+    {
+      "url": "https://pokeapi.co/api/v2/pokemon/1/",
+      "file": "pokemon-detail.json",
+      "reduced": true,
+      "retained_fields": [
+        "id",
+        "name",
+        "types",
+        "sprites.front_default",
+        "sprites.other.official-artwork.front_default"
+      ]
+    }
+  ]
+}
