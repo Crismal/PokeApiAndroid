@@ -28,7 +28,7 @@ class PokeApiRepositoryTest {
                 return Pokemon(id, "pokemon-$id", emptyList(), null)
             }
         }
-        val repository = PokeApiRepository(api)
+        val repository = PokeApiRepository(api, FakePokemonLocalDataSource())
         val first = repository.getPage(20, 20)
         val cached = repository.getPage(20, 20)
         assertEquals((21..40).toList(), first.items.map { it.id })
@@ -52,7 +52,7 @@ class PokeApiRepositoryTest {
                 return Pokemon(id, "pokemon-$id", emptyList(), null)
             }
         }
-        val repository = PokeApiRepository(api)
+        val repository = PokeApiRepository(api, FakePokemonLocalDataSource())
         try {
             repository.getPage(0, 20)
             fail("Expected IOException")
@@ -60,5 +60,29 @@ class PokeApiRepositoryTest {
         fail = false
         assertEquals(listOf(1, 2), repository.getPage(0, 20).items.map { it.id })
         assertEquals(listOf(1, 2, 2), calls)
+    }
+
+    @Test fun recreatedRepositoryReadsSavedPageWithoutAnyApiCalls() = runTest {
+        val local = FakePokemonLocalDataSource()
+        val page = PokemonPage(listOf(Pokemon(25, "pikachu", listOf("electric"), null)), 40)
+        local.savePage(20, 20, page)
+        val offlineApi = object : PokemonApi {
+            override suspend fun getReferences(offset: Int, limit: Int): PokemonReferences =
+                error("Saved page must not request the API")
+            override suspend fun getPokemon(id: Int): Pokemon = error("Saved detail must not be fetched")
+        }
+        assertEquals(page, PokeApiRepository(offlineApi, local).getPage(20, 20))
+    }
+
+    @Test fun savedEmptyTerminalPageIsNotTreatedAsCacheMiss() = runTest {
+        val local = FakePokemonLocalDataSource()
+        val page = PokemonPage(emptyList(), null)
+        local.savePage(100, 20, page)
+        val offlineApi = object : PokemonApi {
+            override suspend fun getReferences(offset: Int, limit: Int): PokemonReferences =
+                error("Empty saved page must not be fetched again")
+            override suspend fun getPokemon(id: Int): Pokemon = error("No detail requests expected")
+        }
+        assertEquals(page, PokeApiRepository(offlineApi, local).getPage(100, 20))
     }
 }
