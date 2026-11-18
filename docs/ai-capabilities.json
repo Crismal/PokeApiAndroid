@@ -1,0 +1,309 @@
+{
+  "schema_version": 1,
+  "catalogue_version": 1,
+  "tracking_started": "2026-11-18",
+  "baseline_reviewed": "2026-11-18",
+  "capabilities": [
+    {
+      "id": "repo-instructions",
+      "name": "Repository rules",
+      "purpose": "Apply durable project conventions and scope boundaries",
+      "availability": "Available through AGENTS.md",
+      "historical_status": "used",
+      "evidence": "AGENTS.md has guided implementations, validation, and manual PR preparation."
+    },
+    {
+      "id": "prompt-coaching",
+      "name": "Prompt coaching",
+      "purpose": "Assess clarity and suggest useful improved prompts",
+      "availability": "Local prompt-coach skill",
+      "historical_status": "used",
+      "evidence": ".agents/skills/prompt-coach/SKILL.md and the two-alternatives rule in AGENTS.md."
+    },
+    {
+      "id": "skill-use",
+      "name": "Using skills",
+      "purpose": "Apply a reusable task workflow",
+      "availability": "Available skills depend on session and branch",
+      "historical_status": "used",
+      "evidence": "SOLID, GitFlow, local API reference, skill-creator, and Figma guidance were read for relevant tasks."
+    },
+    {
+      "id": "skill-authoring",
+      "name": "Creating skills",
+      "purpose": "Write reusable instructions and supporting resources",
+      "availability": "Local files; .agents writes can require approval",
+      "historical_status": "used",
+      "evidence": "Project skills for SOLID, GitFlow, prompt coaching, and local PokeAPI documentation were created."
+    },
+    {
+      "id": "task-planning",
+      "name": "Task planning and progress",
+      "purpose": "Break work into steps and report findings",
+      "availability": "Available in conversation",
+      "historical_status": "used",
+      "evidence": "Home, Room, and search work used staged implementation, validation, and review handoffs."
+    },
+    {
+      "id": "primary-agent",
+      "name": "Primary agent execution",
+      "purpose": "Carry out authorized multi-step repository work",
+      "availability": "Current assistant and exposed tools",
+      "historical_status": "used",
+      "evidence": "Home, Room persistence, and local search were implemented by the primary assistant."
+    },
+    {
+      "id": "multi-agent",
+      "name": "Subagent delegation",
+      "purpose": "Assign independent work to additional agents",
+      "availability": "Delegation tools exist; explicit authorization required",
+      "historical_status": "not_observed",
+      "evidence": "No subagents were spawned in the visible project history."
+    },
+    {
+      "id": "model-recommendation",
+      "name": "Model and effort recommendations",
+      "purpose": "Match task complexity to a suitable model",
+      "availability": "Recommendations supported; see model guide",
+      "historical_status": "used",
+      "evidence": "docs/ai-model-guide.md and recommendations before implementation and Git tasks."
+    },
+    {
+      "id": "model-switching",
+      "name": "Automatic model switching",
+      "purpose": "Change the running conversation model",
+      "availability": "No switching tool exposed; developer selects the model",
+      "historical_status": "not_observed",
+      "evidence": "Recommendations do not establish that a model was switched or which model the developer actually used."
+    },
+    {
+      "id": "repository-inspection",
+      "name": "Repository inspection",
+      "purpose": "Read files, dependencies, Git history, and diffs",
+      "availability": "Shell and filesystem access subject to sandbox",
+      "historical_status": "used",
+      "evidence": "Gradle, source, schemas, and Git changes were inspected before edits."
+    },
+    {
+      "id": "code-implementation",
+      "name": "Code generation and debugging",
+      "purpose": "Implement features, scripts, fixes, and refactoring",
+      "availability": "File-editing and shell tools",
+      "historical_status": "used",
+      "evidence": "4d6e899 Home; a08c02a Room; fc06780 local search, including the keyboard-input fix."
+    },
+    {
+      "id": "automated-verification",
+      "name": "Automated verification",
+      "purpose": "Build, test, lint, and validate results",
+      "availability": "Local toolchains and permissions required",
+      "historical_status": "used",
+      "evidence": "fc06780 validation recorded 25 unit tests, 23 device tests, and 0 lint errors."
+    },
+    {
+      "id": "manual-handoff",
+      "name": "Running the app for manual review",
+      "purpose": "Install, launch, inspect, and leave an Android build open",
+      "availability": "ADB and an available emulator or designated device",
+      "historical_status": "used",
+      "evidence": "Pixel_8a_API_34 was left on Home and later on live search results."
+    },
+    {
+      "id": "visual-inspection",
+      "name": "Visual inspection",
+      "purpose": "Inspect screenshots and rendered app screens",
+      "availability": "Local image viewing and device screenshots",
+      "historical_status": "used",
+      "evidence": "Saved Figma screenshots and emulator captures were inspected, including the search typing defect."
+    },
+    {
+      "id": "diagrams",
+      "name": "Diagrams and visual explanations",
+      "purpose": "Author code-native diagrams to explain decisions",
+      "availability": "Mermaid in repository documentation; rendering depends on viewer",
+      "historical_status": "used",
+      "evidence": "docs/ai-model-guide.md contains a model-selection decision diagram; no render validation is claimed."
+    },
+    {
+      "id": "local-knowledge",
+      "name": "Local knowledge and references",
+      "purpose": "Reuse project-specific contracts and documentation",
+      "availability": "Repository documents and JSON examples",
+      "historical_status": "used",
+      "evidence": "docs/api/pokeapi/ is consulted instead of reopening online PokeAPI docs for routine tasks."
+    },
+    {
+      "id": "web-research",
+      "name": "Online research",
+      "purpose": "Check current primary documentation when needed",
+      "availability": "Web tool exposed; access can fail",
+      "historical_status": "used",
+      "evidence": "Official Android, Coil, Kotlin, and OpenAI guidance informed implementation and the model guide."
+    },
+    {
+      "id": "connected-tools",
+      "name": "Connected tools and integration discovery",
+      "purpose": "Inspect available integrations and invoke relevant MCP tools",
+      "availability": "Tools exposed do not guarantee service or file access",
+      "historical_status": "used",
+      "evidence": "Plugin discovery returned installation state; Figma create_session also returned an access denial."
+    },
+    {
+      "id": "documentation",
+      "name": "Documentation and synthesis",
+      "purpose": "Write guides, decisions, references, and reports",
+      "availability": "Repository editing and conversation",
+      "historical_status": "used",
+      "evidence": "README.md, AGENTS.md, docs/local-storage.md, and local API documents were written."
+    },
+    {
+      "id": "git-workflow",
+      "name": "Git workflow and review preparation",
+      "purpose": "Create branches, commit, push, and resolve conflicts",
+      "availability": "Git access subject to approval; PR submission is manual",
+      "historical_status": "used",
+      "evidence": "Feature/documentation branches were pushed; c41a9f2 resolved a conflict using an explicit force-with-lease."
+    },
+    {
+      "id": "image-generation",
+      "name": "AI image generation and editing",
+      "purpose": "Create raster visual assets from a prompt or reference",
+      "availability": "Image generation tool exposed; not exercised here",
+      "historical_status": "not_observed",
+      "evidence": "Existing artwork and icons were reused; no AI image-generation call was made."
+    },
+    {
+      "id": "website-publishing",
+      "name": "Website building and hosting",
+      "purpose": "Create or publish a website through Sites",
+      "availability": "Sites tools exposed; account/hosting readiness unverified",
+      "historical_status": "not_observed",
+      "evidence": "The Android project has not used Sites or deployed a website."
+    },
+    {
+      "id": "scheduling",
+      "name": "Scheduled automation",
+      "purpose": "Arrange recurring work where supported",
+      "availability": "Sites scheduling is exposed; no general automation tool verified",
+      "historical_status": "not_observed",
+      "evidence": "No persistent scheduled task was created. Local recorder scripts are not scheduled automation."
+    },
+    {
+      "id": "desktop-control",
+      "name": "General desktop or browser control",
+      "purpose": "Operate desktop/browser interfaces through a control integration",
+      "availability": "No general graphical computer-use tool exposed in this session",
+      "historical_status": "not_observed",
+      "evidence": "Android interaction via ADB is tracked under manual handoff; it does not prove desktop browser control."
+    },
+    {
+      "id": "figma-access",
+      "name": "Structured Figma design access",
+      "purpose": "Retrieve file-level design context, tokens, or assets",
+      "availability": "Figma tools exposed; last attempted file access was denied",
+      "historical_status": "attempted",
+      "evidence": "On 2026-11-17, create_session for the Pokedex file reported missing edit access. Screenshots were used instead; no successful structured read is claimed."
+    }
+  ],
+  "prompts": [
+    {
+      "id": "2026-11-18-ai-capability-tracker",
+      "recorded_at_utc": "2026-11-18T08:48:13.482064+00:00",
+      "summary": "Create an evidence-based AI capability tracker and a per-prompt update rule.",
+      "outcome": "Dashboard and recorder implemented; six tests passed; documentation prepared for manual PR review.",
+      "used": [
+        "repo-instructions",
+        "prompt-coaching",
+        "skill-use",
+        "task-planning",
+        "primary-agent",
+        "model-recommendation",
+        "repository-inspection",
+        "code-implementation",
+        "automated-verification",
+        "local-knowledge",
+        "documentation",
+        "git-workflow"
+      ],
+      "attempted": []
+    },
+    {
+      "id": "2026-11-18-simplify-capability-status",
+      "recorded_at_utc": "2026-11-18T09:06:49.797016+00:00",
+      "summary": "Replace capability frequency columns with a single project usage status.",
+      "outcome": "Added Yes/No project usage status based on historical and logged success; seven tests passed.",
+      "used": [
+        "repo-instructions",
+        "prompt-coaching",
+        "skill-use",
+        "primary-agent",
+        "model-recommendation",
+        "repository-inspection",
+        "code-implementation",
+        "automated-verification",
+        "local-knowledge",
+        "documentation",
+        "git-workflow"
+      ],
+      "attempted": []
+    },
+    {
+      "id": "2026-11-18-amend-capability-tracker",
+      "recorded_at_utc": "2026-11-18T09:08:03.545190+00:00",
+      "summary": "Amend the tracker commit and push the existing review branch.",
+      "outcome": "Tracker checks and seven tests verified before amending and pushing the review branch.",
+      "used": [
+        "repo-instructions",
+        "prompt-coaching",
+        "skill-use",
+        "primary-agent",
+        "model-recommendation",
+        "repository-inspection",
+        "automated-verification",
+        "local-knowledge",
+        "documentation",
+        "git-workflow"
+      ],
+      "attempted": []
+    },
+    {
+      "id": "2026-11-18-android-manual-test-skill",
+      "recorded_at_utc": "2026-11-18T09:13:51.228813+00:00",
+      "summary": "Create a reusable skill to leave Android features ready for manual testing and feedback.",
+      "outcome": "Created the handoff skill and linked AGENTS.md. Ruby YAML and naming checks passed; bundled validator blocked by missing PyYAML. Documentation only; app not relaunched.",
+      "used": [
+        "repo-instructions",
+        "prompt-coaching",
+        "skill-use",
+        "skill-authoring",
+        "primary-agent",
+        "model-recommendation",
+        "repository-inspection",
+        "automated-verification",
+        "local-knowledge",
+        "documentation",
+        "git-workflow"
+      ],
+      "attempted": []
+    },
+    {
+      "id": "2026-11-18-pr-manual-test-skill",
+      "recorded_at_utc": "2026-11-18T09:16:04.047237+00:00",
+      "summary": "Prepare the latest manual-testing skill changes for PR review.",
+      "outcome": "Prepared the skill, repository rule, and tracker updates for committing to the existing documentation review branch.",
+      "used": [
+        "repo-instructions",
+        "prompt-coaching",
+        "skill-use",
+        "primary-agent",
+        "model-recommendation",
+        "repository-inspection",
+        "automated-verification",
+        "local-knowledge",
+        "documentation",
+        "git-workflow"
+      ],
+      "attempted": []
+    }
+  ]
+}
