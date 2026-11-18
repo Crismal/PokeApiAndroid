@@ -47,4 +47,6 @@ Read [AGENTS.md](AGENTS.md) for the project's AI collaboration instructions. For
 
 See the [model-selection guide and decision diagram](docs/ai-model-guide.md) for task-based recommendations. Before changes, the assistant recommends a suitable model and reasoning effort. After application implementation, it installs and launches the tested app and leaves it ready for manual testing when a device is available.
 
+The [AI capability usage tracker](docs/ai-capabilities.md) records our observed use of skills, agents, tools, and other capabilities. It shows evidence-based percentages and is updated after each user prompt; these numbers measure usage, not mastery or total AI potential.
+
 AI-generated changes still require human review. Review the code, understand the decisions, and check the reported validation before accepting a change.
