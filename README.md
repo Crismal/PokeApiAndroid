@@ -25,13 +25,17 @@ With MVVM, Compose screens display UI state and send user actions to ViewModels.
 
 ## Home
 
-Home displays Pokemon IDs, names, types, and API-provided artwork. It loads 20 Pokemon initially and automatically requests another page near the end of the list. Failed page loads offer retry while preserving previously loaded cards. Search, filters, sorting, and detail navigation are reserved for separate changes.
+Home displays Pokemon IDs, names, types, and API-provided artwork. It loads 20 Pokemon initially and automatically requests another page near the end of the list. Failed page loads offer retry while preserving previously loaded cards. Search, sorting, generations, and detail navigation remain separate features.
+
+The Filters button opens a scrollable sheet with types, weaknesses, heights, weights, and an inclusive ID range. Select up to three options per group; any option within a group matches, while all active groups must match. Apply commits the draft; dismiss discards it. Reset clears the draft, and Apply then restores normal pagination. The range starts at 1–1000 and expands to the highest saved ID if larger. An unrestricted upper bound includes all saved IDs.
+
+Filters operate on all Pokemon details saved in Room, including earlier browsing sessions. They do not search the entire online catalogue. Active filters pause network pagination and display the saved-data coverage. First use of a size filter may refresh missing attributes for matching saved Pokemon; a weakness filter may download and persist type-defense metadata. Once those attributes are saved, filtering works offline. See [filter data contracts](docs/api/pokeapi/filters.md) for size thresholds and weakness calculation.
 
 The repository reads saved pages and Pokemon details from Room before requesting the API. Page ordering, next-page cursors, and fetch timestamps survive app restarts. Missing pages are downloaded, stored transactionally, and then read from the database. Detail requests are limited to four at a time and retain the API's list ordering.
 
 An app-wide Coil image loader uses a 100 MiB disk cache and a memory cache capped at 15% of available app memory. Image files stay outside Room; the database stores their URLs. The 20 MiB HTTP cache remains for server-cacheable API responses. See [local storage behavior](docs/local-storage.md) for cache policy, offline limitations, and database schema guidance.
 
-The screen follows the saved Home screenshot. Dimensions in `ui/home/HomeDimensions` are estimates for manual tuning; the bundled system font is used because the design's SF Pro font is not included. Home currently uses a fixed light appearance to match that reference.
+The screen follows the saved Home screenshot. Dimensions in `ui/home/HomeDimensions` and the filter sheet are estimates for manual tuning; the bundled system font is used because the design's SF Pro font is not included. The filter sheet uses a dimmed backdrop and labelled height/weight controls because the exact silhouettes are not in the saved assets. Home currently uses a fixed light appearance to match that reference.
 
 To verify the implementation:
 
@@ -50,3 +54,5 @@ See the [model-selection guide and decision diagram](docs/ai-model-guide.md) for
 The [AI capability usage tracker](docs/ai-capabilities.md) records our observed use of skills, agents, tools, and other capabilities. It shows evidence-based percentages and is updated after each user prompt; these numbers measure usage, not mastery or total AI potential.
 
 AI-generated changes still require human review. Review the code, understand the decisions, and check the reported validation before accepting a change.
+
+Completed repository changes automatically end with a focused commit, a pushed GitFlow branch, and a prefilled PR link targeting the appropriate base (normally `develop`). The developer submits the PR manually. Unfinished work or material unanswered questions stay local; an explicit request to keep changes local overrides this default. Tracker-only bookkeeping for conversational questions does not trigger a PR.

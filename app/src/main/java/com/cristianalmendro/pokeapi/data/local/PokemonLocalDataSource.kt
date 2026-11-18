@@ -2,9 +2,13 @@ package com.cristianalmendro.pokeapi.data.local
 
 import com.cristianalmendro.pokeapi.data.Pokemon
 import com.cristianalmendro.pokeapi.data.PokemonPage
+import com.cristianalmendro.pokeapi.data.TypeDefenses
 
 /** Persistent records; a missing page is different from a saved, empty final page. */
 interface PokemonLocalDataSource {
+    suspend fun getAllPokemon(): List<Pokemon>
+    suspend fun getTypeDefenses(name: String): TypeDefenses?
+    suspend fun saveTypeDefenses(defenses: TypeDefenses)
     suspend fun getPage(offset: Int, limit: Int): PokemonPage?
     suspend fun getPokemon(id: Int): Pokemon?
     suspend fun savePokemon(pokemon: Pokemon)

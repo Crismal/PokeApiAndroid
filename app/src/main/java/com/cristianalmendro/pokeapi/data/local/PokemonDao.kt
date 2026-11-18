@@ -7,6 +7,14 @@ import androidx.room.Upsert
 
 @Dao
 interface PokemonDao {
+    @Query("SELECT * FROM pokemon ORDER BY id")
+    suspend fun getAllPokemon(): List<PokemonEntity>
+
+    @Query("SELECT * FROM type_defenses WHERE name = :name")
+    suspend fun getTypeDefenses(name: String): TypeDefenseEntity?
+
+    @Upsert suspend fun upsertTypeDefenses(defenses: TypeDefenseEntity)
+
     @Query("SELECT * FROM pokemon WHERE id = :id")
     suspend fun getPokemon(id: Int): PokemonEntity?
 

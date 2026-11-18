@@ -4,7 +4,8 @@
 
 Room stores the Home data used by the app, rather than every field from the API:
 
-- `pokemon`: ID, API name, ordered type names, and nullable artwork URL. Types use a JSON-list converter to preserve their order.
+- `pokemon`: ID, API name, ordered type names, nullable artwork URL, and nullable height/weight in API units. Types use a JSON-list converter to preserve their order.
+- `type_defenses`: incoming double-damage, half-damage, and immunity type names, keyed by defensive type. Fetched only when a weakness filter needs them, then reused offline.
 - `pokemon_pages`: a composite offset/page-size key, the next offset (including null at the end), expected item count, and fetch time in epoch milliseconds.
 - `pokemon_page_entries`: each page's Pokemon IDs and their positions. IDs are not assumed to be contiguous or equal to offsets.
 
@@ -26,7 +27,7 @@ Coil caches artwork that has actually been loaded. It does not predownload every
 
 ## Schema and dependencies
 
-The initial database schema is version 1 and is exported under `app/schemas/`. Commit schema changes with the implementation. Future schema changes must increase the version and supply a tested migration; destructive migration is not enabled.
+The current database schema is version 3 and is exported under `app/schemas/`. Non-destructive migrations from version 1 and the separate search feature's version 2 add nullable height/weight fields and type defenses. Existing pages, details, and any search tables are retained. The historical version-2 schema comes from that search branch for migration verification; search UI and logic are not included here. Integrating the separate search feature must retain version-3 filter fields and register its entities together with these entities. Future schema changes must increase the version and supply a tested migration; destructive migration is not enabled.
 
 Room 2.8.5 uses the existing `androidx.room` APIs. KSP 2.3.12 generates the DAO/database implementation without adding a separate Kotlin Android plugin to the existing AGP built-in Kotlin setup. SDK and Kotlin configuration are unchanged.
 

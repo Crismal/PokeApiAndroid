@@ -19,7 +19,8 @@ import okhttp3.OkHttpClient
 
 class PokeApiApplication : Application(), SingletonImageLoader.Factory {
     private val database by lazy {
-        Room.databaseBuilder(this, PokemonDatabase::class.java, "pokemon.db").build()
+        Room.databaseBuilder(this, PokemonDatabase::class.java, "pokemon.db")
+            .addMigrations(PokemonDatabase.MIGRATION_1_3, PokemonDatabase.MIGRATION_2_3).build()
     }
     val pokemonRepository: PokemonRepository by lazy {
         val client = OkHttpClient.Builder()

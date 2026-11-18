@@ -7,6 +7,17 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class PokeApiServiceTest {
+    @Test fun parsesSizeUnitsAndIncomingTypeDefenses() = runTest {
+        val service = PokeApiService(JsonHttpClient { url ->
+            if (url.contains("type/grass/")) JSONObject("""{"name":"grass","damage_relations":{
+                "double_damage_from":[{"name":"fire"}],"half_damage_from":[{"name":"water"}],"no_damage_from":[]}}""")
+            else JSONObject("""{"id":1,"name":"bulbasaur","height":7,"weight":69,"types":[],"sprites":{}}""")
+        })
+        assertEquals(7, service.getPokemon(1).heightDecimetres)
+        assertEquals(69, service.getPokemon(1).weightHectograms)
+        assertEquals(2.0, service.getTypeDefenses("grass").multiplier("fire"), 0.0)
+        assertEquals(0.5, service.getTypeDefenses("grass").multiplier("water"), 0.0)
+    }
     @Test fun extractsActualIdsAndServerCursorRatherThanUsingRowPositions() = runTest {
         val service = PokeApiService(JsonHttpClient { url ->
             assertEquals("https://pokeapi.co/api/v2/pokemon?limit=20&offset=0", url)
