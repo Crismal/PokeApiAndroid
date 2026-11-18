@@ -265,6 +265,45 @@
         "git-workflow"
       ],
       "attempted": []
+    },
+    {
+      "id": "2026-11-18-android-manual-test-skill",
+      "recorded_at_utc": "2026-11-18T09:13:51.228813+00:00",
+      "summary": "Create a reusable skill to leave Android features ready for manual testing and feedback.",
+      "outcome": "Created the handoff skill and linked AGENTS.md. Ruby YAML and naming checks passed; bundled validator blocked by missing PyYAML. Documentation only; app not relaunched.",
+      "used": [
+        "repo-instructions",
+        "prompt-coaching",
+        "skill-use",
+        "skill-authoring",
+        "primary-agent",
+        "model-recommendation",
+        "repository-inspection",
+        "automated-verification",
+        "local-knowledge",
+        "documentation",
+        "git-workflow"
+      ],
+      "attempted": []
+    },
+    {
+      "id": "2026-11-18-pr-manual-test-skill",
+      "recorded_at_utc": "2026-11-18T09:16:04.047237+00:00",
+      "summary": "Prepare the latest manual-testing skill changes for PR review.",
+      "outcome": "Prepared the skill, repository rule, and tracker updates for committing to the existing documentation review branch.",
+      "used": [
+        "repo-instructions",
+        "prompt-coaching",
+        "skill-use",
+        "primary-agent",
+        "model-recommendation",
+        "repository-inspection",
+        "automated-verification",
+        "local-knowledge",
+        "documentation",
+        "git-workflow"
+      ],
+      "attempted": []
     }
   ]
 }

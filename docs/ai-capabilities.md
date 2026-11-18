@@ -5,8 +5,8 @@ Catalogue version: 1. Prompt tracking started: 2026-11-18.
 This is an evidence-based learning log for this project. Percentages measure observed use, not AI potential, proficiency, time, token consumption, cost, or developer mastery. The catalogue is a curated inventory, not an exhaustive list of everything AI can do.
 
 - **Observed project coverage: 72.0%** (18/25 categories successfully used in historical evidence or tracked prompts).
-- **Coverage within the tracked log: 48.0%** (12/25 categories used in 3 logged prompts).
-- **Prompts logged: 3.** Earlier conversations have selected historical evidence, not reconstructed prompt counts.
+- **Coverage within the tracked log: 52.0%** (13/25 categories used in 5 logged prompts).
+- **Prompts logged: 5.** Earlier conversations have selected historical evidence, not reconstructed prompt counts.
 
 ## How to read the status and coverage
 
@@ -85,6 +85,8 @@ Only the latest 20 entries are displayed; the JSON ledger retains all entries.
 | 2026-11-18-ai-capability-tracker | 2026-11-18T08:48:13.482064+00:00 | Create an evidence-based AI capability tracker and a per-prompt update rule. | repo-instructions, prompt-coaching, skill-use, task-planning, primary-agent, model-recommendation, repository-inspection, code-implementation, automated-verification, local-knowledge, documentation, git-workflow | Dashboard and recorder implemented; six tests passed; documentation prepared for manual PR review. |
 | 2026-11-18-simplify-capability-status | 2026-11-18T09:06:49.797016+00:00 | Replace capability frequency columns with a single project usage status. | repo-instructions, prompt-coaching, skill-use, primary-agent, model-recommendation, repository-inspection, code-implementation, automated-verification, local-knowledge, documentation, git-workflow | Added Yes/No project usage status based on historical and logged success; seven tests passed. |
 | 2026-11-18-amend-capability-tracker | 2026-11-18T09:08:03.545190+00:00 | Amend the tracker commit and push the existing review branch. | repo-instructions, prompt-coaching, skill-use, primary-agent, model-recommendation, repository-inspection, automated-verification, local-knowledge, documentation, git-workflow | Tracker checks and seven tests verified before amending and pushing the review branch. |
+| 2026-11-18-android-manual-test-skill | 2026-11-18T09:13:51.228813+00:00 | Create a reusable skill to leave Android features ready for manual testing and feedback. | repo-instructions, prompt-coaching, skill-use, skill-authoring, primary-agent, model-recommendation, repository-inspection, automated-verification, local-knowledge, documentation, git-workflow | Created the handoff skill and linked AGENTS.md. Ruby YAML and naming checks passed; bundled validator blocked by missing PyYAML. Documentation only; app not relaunched. |
+| 2026-11-18-pr-manual-test-skill | 2026-11-18T09:16:04.047237+00:00 | Prepare the latest manual-testing skill changes for PR review. | repo-instructions, prompt-coaching, skill-use, primary-agent, model-recommendation, repository-inspection, automated-verification, local-knowledge, documentation, git-workflow | Prepared the skill, repository rule, and tracker updates for committing to the existing documentation review branch. |
 
 ## Updating this document
 
