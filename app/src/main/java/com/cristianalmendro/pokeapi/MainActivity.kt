@@ -32,6 +32,11 @@ class MainActivity : ComponentActivity() {
                         onLoadMore = homeViewModel::loadNextPage,
                         onRetry = homeViewModel::retry,
                         modifier = Modifier.padding(innerPadding),
+                        onOpenFilters = homeViewModel::openFilters,
+                        onDraftChange = homeViewModel::updateDraft,
+                        onResetFilters = homeViewModel::resetDraft,
+                        onApplyFilters = homeViewModel::applyFilters,
+                        onDismissFilters = homeViewModel::dismissFilters,
                     )
                 }
             }

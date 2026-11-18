@@ -8,6 +8,7 @@ Use this reference before opening online PokeAPI documentation. It describes the
 | --- | --- |
 | [Pagination](pagination.md) | Pokemon list, limit/offset, resource URLs, page boundaries |
 | [Pokemon details](pokemon.md) | IDs, names, types, and artwork for Home cards |
+| [Cached filters](filters.md) | Height, weight, incoming type defenses, filter matching and cache coverage |
 | [Examples](examples/) | Captured API responses, reduced detail fields, and capture metadata |
 
 API base: `https://pokeapi.co/api/v2/`.

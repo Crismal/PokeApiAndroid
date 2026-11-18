@@ -35,8 +35,9 @@ Use the existing `master` branch name; do not rename it to `main`. Existing `fea
 - Run checks appropriate to the change and include actual validation results in the PR description.
 - Target ordinary feature, bugfix, documentation, and maintenance PRs at `develop`. Target release and production-hotfix PRs at `master` and describe the required integration back into `develop`.
 - Inspect the diff against the intended base so the PR contains only relevant changes. Do not rebase or force-push shared branches just to simplify a diff without explicit authorization.
-- A request to implement does not authorize committing, pushing, creating a PR, merging, tagging, or publishing a release. Perform those actions only within the developer's explicit authorization; a request to create a PR includes pushing its required branch.
-- Verify external actions actually succeeded. If GitHub access cannot create a PR, report the limitation accurately; a pushed branch or comparison link is not an opened PR.
+- Follow the standing PR-preparation authorization in AGENTS.md after completed repository-change tasks. Keep unfinished work, unresolved required validation, and work awaiting material developer answers local. An explicit local-only instruction overrides the default. Tracker bookkeeping for a question or acknowledgment alone does not trigger a PR.
+- Prepare the branch and reviewable diff, run the relevant checks, update the capability tracker, and commit only task-related paths. Preserve unrelated staged files; use a path-limited commit when needed. Push a normal follow-up commit on an existing review branch rather than amending or force-pushing without explicit authorization.
+- Provide a URL-encoded GitHub comparison link with the intended base, branch, title, and description for manual submission. Describe the final behavior, actual validation, and material limitations. Do not submit the PR automatically, probe PR authentication, or add integrations to submit it. Verify the push succeeded and describe the result as a prepared PR link; a branch or comparison link is not an opened PR. Merging, tags, releases, and deployment still need explicit authorization.
 
 ## Releases and hotfixes
 

@@ -115,6 +115,7 @@ class HomeViewModelTest {
     )
 
     private class FakeRepository(vararg responses: suspend () -> PokemonPage) : PokemonRepository {
+        override suspend fun getFilteredCache(filters: com.cristianalmendro.pokeapi.data.PokemonFilters): com.cristianalmendro.pokeapi.data.CachedPokemonResult = error("Unexpected filter request")
         private val responses = ArrayDeque(responses.toList())
         val requests = mutableListOf<Pair<Int, Int>>()
         override suspend fun getPage(offset: Int, limit: Int): PokemonPage {

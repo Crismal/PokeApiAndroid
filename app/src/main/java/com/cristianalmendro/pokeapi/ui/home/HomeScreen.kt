@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,6 +18,8 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -35,6 +38,7 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.cristianalmendro.pokeapi.R
 import kotlinx.coroutines.flow.distinctUntilChanged
+import com.cristianalmendro.pokeapi.data.PokemonFilters
 
 @Composable
 fun HomeScreen(
@@ -42,11 +46,20 @@ fun HomeScreen(
     onLoadMore: () -> Unit,
     onRetry: () -> Unit,
     modifier: Modifier = Modifier,
+    onOpenFilters: () -> Unit = {},
+    onDraftChange: (PokemonFilters) -> Unit = {},
+    onResetFilters: () -> Unit = {},
+    onApplyFilters: () -> Unit = {},
+    onDismissFilters: () -> Unit = {},
 ) {
     val listState = rememberLazyListState()
     val loadMore by rememberUpdatedState(onLoadMore)
-    LaunchedEffect(listState, state.pokemon.size, state.isLoading, state.hasMore, state.hasError) {
-        if (state.pokemon.isNotEmpty() && !state.isLoading && state.hasMore && !state.hasError) {
+    LaunchedEffect(state.filters) { listState.scrollToItem(0) }
+    if (state.showFilters) {
+        PokemonFilterSheet(state, onDraftChange, onResetFilters, onApplyFilters, onDismissFilters)
+    }
+    LaunchedEffect(listState, state.pokemon.size, state.isLoading, state.hasMore, state.hasError, state.showFilters) {
+        if (!state.showFilters && state.pokemon.isNotEmpty() && !state.isLoading && state.hasMore && !state.hasError) {
             snapshotFlow {
                 val last = listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: -1
                 // One header precedes the cards. Prefetch when the last three cards are visible.
@@ -61,7 +74,17 @@ fun HomeScreen(
         contentPadding = PaddingValues(horizontal = HomeDimensions.pagePadding, vertical = 24.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        item(key = "header") { HomeHeader() }
+        item(key = "header") { HomeHeader(onOpenFilters, state.filters.isActive) }
+        if (state.filters.isActive) {
+            item(key = "filter-summary") {
+                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    Text(stringResource(R.string.filters_results, state.pokemon.size, state.cachedCount),
+                        modifier = Modifier.weight(1f), fontSize = 12.sp,
+                        color = colorResource(R.color.pokemon_gray))
+                    TextButton(onClick = onOpenFilters) { Text(stringResource(R.string.filters_edit)) }
+                }
+            }
+        }
         items(state.pokemon, key = { it.id }) { PokemonCard(it) }
         item(key = "status") {
             Column(Modifier.fillMaxWidth().padding(vertical = 16.dp),
@@ -79,8 +102,10 @@ fun HomeScreen(
                             else R.string.home_append_error))
                         Button(onClick = onRetry) { Text(stringResource(R.string.retry)) }
                     }
-                    state.pokemon.isEmpty() -> Text(stringResource(R.string.home_empty))
-                    !state.hasMore -> Text(stringResource(R.string.home_end),
+                    state.pokemon.isEmpty() -> Text(stringResource(if (state.filters.isActive)
+                        R.string.filters_empty else R.string.home_empty))
+                    !state.hasMore -> Text(stringResource(if (state.filters.isActive)
+                        R.string.filters_cached_end else R.string.home_end),
                         color = colorResource(R.color.pokemon_gray))
                 }
             }
@@ -89,11 +114,16 @@ fun HomeScreen(
 }
 
 @Composable
-private fun HomeHeader() {
-    Box(Modifier.fillMaxWidth().height(156.dp)) {
+private fun HomeHeader(onOpenFilters: () -> Unit, filtered: Boolean) {
+    Box(Modifier.fillMaxWidth().height(186.dp)) {
         AsyncImage(model = R.raw.pokemon_pokeball, contentDescription = null,
             colorFilter = ColorFilter.tint(Color(0xFFF2F2F2)),
             modifier = Modifier.align(Alignment.TopEnd).offset(x = 12.dp, y = (-120).dp).size(300.dp))
+        IconButton(onClick = onOpenFilters, modifier = Modifier.align(Alignment.TopEnd).testTag("open-filters")) {
+            AsyncImage(R.raw.pokemon_filter, contentDescription = stringResource(R.string.filters_title),
+                colorFilter = ColorFilter.tint(if (filtered) Color(0xFFEA5D60) else colorResource(R.color.pokemon_black)),
+                modifier = Modifier.size(24.dp))
+        }
         Column(Modifier.align(Alignment.BottomStart).padding(bottom = 16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Text(stringResource(R.string.home_title), fontSize = 32.sp,

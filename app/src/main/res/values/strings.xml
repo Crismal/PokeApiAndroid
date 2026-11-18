@@ -9,4 +9,27 @@
     <string name="home_empty">No Pokémon found.</string>
     <string name="home_end">You have reached the end of the Pokédex.</string>
     <string name="retry">Retry</string>
+    <string name="filters_title">Filters</string>
+    <string name="filters_description">Use advanced search to explore Pokémon by type, weakness, height and more!</string>
+    <string name="filters_limit">Select up to 3 options per group. Options within a group match any; active groups must all match.</string>
+    <string name="filters_types">Types</string>
+    <string name="filters_weaknesses">Weaknesses</string>
+    <string name="filters_heights">Heights</string>
+    <string name="filters_weights">Weights</string>
+    <string name="filters_number_range">Number Range</string>
+    <string name="filters_reset">Reset</string>
+    <string name="filters_apply">Apply</string>
+    <string name="filters_edit">Edit</string>
+    <string name="height_short">Short (&lt;1 m)</string>
+    <string name="height_medium">Medium (1–&lt;2 m)</string>
+    <string name="height_tall">Tall (≥2 m)</string>
+    <string name="weight_light">Light (&lt;10 kg)</string>
+    <string name="weight_medium">Medium (10–&lt;100 kg)</string>
+    <string name="weight_heavy">Heavy (≥100 kg)</string>
+    <string name="filters_cache_note">Filters cover %1$d saved Pokémon only. Missing size or type-defense data may need a one-time download. Browse more Pokémon with filters cleared to expand the cache.</string>
+    <string name="filters_preparing">Preparing saved filter data…</string>
+    <string name="filters_error">Could not prepare saved filter data. Connect to the internet and try Apply again.</string>
+    <string name="filters_results">%1$d matches · %2$d saved Pokémon</string>
+    <string name="filters_empty">No saved Pokémon match these filters. Edit or reset your filters.</string>
+    <string name="filters_cached_end">End of saved matches. Clear filters to browse and cache more Pokémon.</string>
 </resources>

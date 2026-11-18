@@ -10,6 +10,7 @@ data class PokemonReferences(val ids: List<Int>, val nextOffset: Int?)
 interface PokemonApi {
     suspend fun getReferences(offset: Int, limit: Int): PokemonReferences
     suspend fun getPokemon(id: Int): Pokemon
+    suspend fun getTypeDefenses(name: String): TypeDefenses
 }
 
 class PokeApiService(private val http: JsonHttpClient) : PokemonApi {
@@ -59,8 +60,25 @@ class PokeApiService(private val http: JsonHttpClient) : PokemonApi {
                 .map { it.getJSONObject("type").getString("name") },
             artworkUrl = artwork.nonEmptyString("front_default")
                 ?: sprites.nonEmptyString("front_default"),
+            heightDecimetres = json.optionalPositiveInt("height"),
+            weightHectograms = json.optionalPositiveInt("weight"),
         )
     }
+
+    override suspend fun getTypeDefenses(name: String): TypeDefenses = parseResponse {
+        require(name.matches(Regex("[a-z]+")))
+        val json = http.get("${BASE_URL}type/$name/")
+        if (json.getString("name") != name) throw IOException("Unexpected type identity")
+        val relations = json.getJSONObject("damage_relations")
+        fun names(key: String): List<String> {
+            val values = relations.getJSONArray(key)
+            return List(values.length()) { values.getJSONObject(it).getString("name") }
+        }
+        TypeDefenses(name, names("double_damage_from"), names("half_damage_from"), names("no_damage_from"))
+    }
+
+    private fun JSONObject.optionalPositiveInt(key: String): Int? =
+        if (isNull(key)) null else getInt(key).takeIf { it > 0 }
 
     private suspend fun <T> parseResponse(block: suspend () -> T): T = try {
         block()

@@ -13,6 +13,7 @@ class PokeApiRepositoryTest {
         var detailCalls = 0
         var pageCalls = 0
         val api = object : PokemonApi {
+            override suspend fun getTypeDefenses(name: String): com.cristianalmendro.pokeapi.data.TypeDefenses = error("Unexpected type request")
             override suspend fun getReferences(offset: Int, limit: Int): PokemonReferences {
                 pageCalls++
                 assertEquals(20, offset)
@@ -43,6 +44,7 @@ class PokeApiRepositoryTest {
         val calls = mutableListOf<Int>()
         var fail = true
         val api = object : PokemonApi {
+            override suspend fun getTypeDefenses(name: String): com.cristianalmendro.pokeapi.data.TypeDefenses = error("Unexpected type request")
             override suspend fun getReferences(offset: Int, limit: Int) =
                 PokemonReferences(listOf(1, 2), null)
             override suspend fun getPokemon(id: Int): Pokemon {
@@ -67,6 +69,7 @@ class PokeApiRepositoryTest {
         val page = PokemonPage(listOf(Pokemon(25, "pikachu", listOf("electric"), null)), 40)
         local.savePage(20, 20, page)
         val offlineApi = object : PokemonApi {
+            override suspend fun getTypeDefenses(name: String): com.cristianalmendro.pokeapi.data.TypeDefenses = error("Unexpected type request")
             override suspend fun getReferences(offset: Int, limit: Int): PokemonReferences =
                 error("Saved page must not request the API")
             override suspend fun getPokemon(id: Int): Pokemon = error("Saved detail must not be fetched")
@@ -79,6 +82,7 @@ class PokeApiRepositoryTest {
         val page = PokemonPage(emptyList(), null)
         local.savePage(100, 20, page)
         val offlineApi = object : PokemonApi {
+            override suspend fun getTypeDefenses(name: String): com.cristianalmendro.pokeapi.data.TypeDefenses = error("Unexpected type request")
             override suspend fun getReferences(offset: Int, limit: Int): PokemonReferences =
                 error("Empty saved page must not be fetched again")
             override suspend fun getPokemon(id: Int): Pokemon = error("No detail requests expected")

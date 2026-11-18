@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteException
 import androidx.room.withTransaction
 import com.cristianalmendro.pokeapi.data.Pokemon
 import com.cristianalmendro.pokeapi.data.PokemonPage
+import com.cristianalmendro.pokeapi.data.TypeDefenses
 import java.io.IOException
 
 class RoomPokemonLocalDataSource(
@@ -11,6 +12,12 @@ class RoomPokemonLocalDataSource(
     private val clock: () -> Long = System::currentTimeMillis,
 ) : PokemonLocalDataSource {
     private val dao = database.pokemonDao()
+
+    override suspend fun getAllPokemon() = storageOperation { dao.getAllPokemon().map { it.toPokemon() } }
+    override suspend fun getTypeDefenses(name: String) = storageOperation { dao.getTypeDefenses(name)?.toDefenses() }
+    override suspend fun saveTypeDefenses(defenses: TypeDefenses) = storageOperation {
+        dao.upsertTypeDefenses(defenses.toEntity())
+    }
 
     override suspend fun getPage(offset: Int, limit: Int): PokemonPage? = storageOperation {
         database.withTransaction {

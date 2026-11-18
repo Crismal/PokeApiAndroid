@@ -45,6 +45,7 @@ class PokemonPersistenceTest {
         database.close()
         database = openDatabase()
         val offline = object : PokemonApi {
+            override suspend fun getTypeDefenses(name: String): com.cristianalmendro.pokeapi.data.TypeDefenses = error("Unexpected type request")
             override suspend fun getReferences(offset: Int, limit: Int): PokemonReferences =
                 error("Unexpected network page request")
             override suspend fun getPokemon(id: Int): Pokemon = error("Unexpected detail request")
@@ -70,6 +71,7 @@ class PokemonPersistenceTest {
         val requests = mutableListOf<Int>()
         val firstDetailSaved = CompletableDeferred<Unit>()
         val api = object : PokemonApi {
+            override suspend fun getTypeDefenses(name: String): com.cristianalmendro.pokeapi.data.TypeDefenses = error("Unexpected type request")
             override suspend fun getReferences(offset: Int, limit: Int) =
                 PokemonReferences(listOf(1, 2), null)
             override suspend fun getPokemon(id: Int): Pokemon {
