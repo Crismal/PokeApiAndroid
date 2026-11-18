@@ -304,6 +304,107 @@
         "git-workflow"
       ],
       "attempted": []
+    },
+    {
+      "id": "2026-11-18-pokemon-filters",
+      "recorded_at_utc": "2026-11-18T09:22:49.905512+00:00",
+      "summary": "Implement screenshot-based Pokémon filters and clarify undefined behavior.",
+      "outcome": "Inspected all screenshots, data contracts, and code. Located the complete filter layout; awaiting matching, size boundary, and catalogue coverage decisions before implementation.",
+      "used": [
+        "repo-instructions",
+        "prompt-coaching",
+        "skill-use",
+        "task-planning",
+        "primary-agent",
+        "model-recommendation",
+        "repository-inspection",
+        "visual-inspection",
+        "local-knowledge",
+        "documentation",
+        "git-workflow"
+      ],
+      "attempted": []
+    },
+    {
+      "id": "2026-11-18-pokemon-filter-selection-rules",
+      "recorded_at_utc": "2026-11-18T09:47:39.747354+00:00",
+      "summary": "Implement cache-based Filters with up to three selections per category and a 1–1000 or higher cached-ID range.",
+      "outcome": "Implemented filter sheet, draft Apply/Reset, cached matching, size metadata and type-defense persistence, and non-destructive migrations to schema 3. Build, lint, 30 unit tests and 18 device tests passed. Debug app launched on Pixel_8a_API_34; height/weight silhouettes unavailable, labelled controls used.",
+      "used": [
+        "repo-instructions",
+        "prompt-coaching",
+        "skill-use",
+        "task-planning",
+        "primary-agent",
+        "model-recommendation",
+        "repository-inspection",
+        "code-implementation",
+        "automated-verification",
+        "manual-handoff",
+        "visual-inspection",
+        "local-knowledge",
+        "documentation",
+        "git-workflow"
+      ],
+      "attempted": []
+    },
+    {
+      "id": "2026-11-18-filters-pr-and-default-handoff",
+      "recorded_at_utc": "2026-11-18T09:54:32.149797+00:00",
+      "summary": "Prepare the Filters PR and authorize automatic PR preparation after completed repository changes.",
+      "outcome": "Added standing authorization in AGENTS.md, updated GitFlow and README, and prepared Filters plus workflow changes for commit and push. Verified prior 30 unit tests, 18 device tests, lint with zero errors, skill YAML, and tracker consistency. PR submission remains manual.",
+      "used": [
+        "repo-instructions",
+        "prompt-coaching",
+        "skill-use",
+        "skill-authoring",
+        "task-planning",
+        "primary-agent",
+        "model-recommendation",
+        "repository-inspection",
+        "automated-verification",
+        "local-knowledge",
+        "documentation",
+        "git-workflow"
+      ],
+      "attempted": []
+    },
+    {
+      "id": "2026-11-18-separate-android-window",
+      "recorded_at_utc": "2026-11-18T09:58:15.420432+00:00",
+      "summary": "Open Android tooling in a separate window.",
+      "outcome": "Confirmed no Android device is currently running and Pixel_8a_API_34 is available. Awaiting clarification between an emulator window and a Terminal with ADB logs.",
+      "used": [
+        "repo-instructions",
+        "prompt-coaching",
+        "skill-use",
+        "primary-agent",
+        "model-recommendation",
+        "repository-inspection",
+        "local-knowledge",
+        "documentation"
+      ],
+      "attempted": []
+    },
+    {
+      "id": "2026-11-18-require-latest-develop",
+      "recorded_at_utc": "2026-11-18T10:13:55.900141+00:00",
+      "summary": "Review existing GitFlow guidance and require the latest develop before every implementation.",
+      "outcome": "Strengthened the existing GitFlow skill and AGENTS.md with mandatory fetch and ancestry checks, synchronization for ongoing branches, PR handoff recheck, and explicit offline/conflict handling. YAML and whitespace checks passed; documentation branch starts from fetched origin/develop.",
+      "used": [
+        "repo-instructions",
+        "prompt-coaching",
+        "skill-use",
+        "skill-authoring",
+        "primary-agent",
+        "model-recommendation",
+        "repository-inspection",
+        "automated-verification",
+        "local-knowledge",
+        "documentation",
+        "git-workflow"
+      ],
+      "attempted": []
     }
   ]
 }
